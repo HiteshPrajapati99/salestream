@@ -1,0 +1,58 @@
+
+Base Link = http://localhost:5000/store
+
+ ////........... User Routes ....../////
+
+1. User Register           =>    /register
+2. User Login              =>    /login
+3. User profile            =>    /profile
+4. Update User Profile     =>    /profile/update/:id
+5. User Block              =>    /user/block/:id
+6. User Unblock            =>    /user/unblock/:id 
+7. Forgot Password         =>    /forgot-password
+8. Create Link Password    =>    /reset/password/:id/:token 
+9. Reset Password          =>    /reset/password/:id/:token
+10. Get All Users          =>    /users
+11. Get single User        =>    /user/:id
+
+
+ ////........... Product Routes ....../////
+
+
+1. Create New Product       =>  /product/create
+2. Get All Product List     =>  /product
+3. Get single Product       =>  /product/:id
+4. Delete Multiple Product  =>  /product/delete
+5. Delete single Product    =>  /product/delete/:id
+6. Edit Product             =>  /product/edit/:id
+7. Delete Image on Edit     =>  /product/edit/delete/image/:id
+8. Add WishList             =>  /product/wishlist
+9. Rate Product             =>  /product/ratings
+
+
+ ////........... Categories Routes ....../////
+
+1. Create Categories        =>  /categories/create
+2. Get All Categoriee       =>  /categories
+   Nested List
+3. Edit Category            =>  /categories/edit/:id
+4. Get List                 =>  /categories/list
+5. Delete Category          =>  /categories/delete/:id
+
+
+
+ ////........... Brand Routes ....../////
+
+ 1. Create Brand       => /brand/create
+ 2. Get List Brand     => /brand
+ 3. Delete Brand       => /brand/delete/:id
+
+
+
+
+ ////........... Blog Routes ....../////
+1. Create Blog           =>    /blog/create
+2. Get All Blog          =>    /blog
+3. Get Blog By ID        =>    /blog/:id 
+4. Delete Blog By ID     =>    /blog/delete/:id
+5. Edit Blog By ID       =>    /edit/:id
