@@ -1,20 +1,25 @@
 const Order = require("../../models/order");
 const asyncHandler = require("express-async-handler");
 const Customer = require("../../models/Store_Customers");
+const Store = require("../../models/Store")
 
 module.exports.CreateOrder = asyncHandler(async (req, res) => {
     const {id} = req.customer;
+    const user = req.decoded;
     // console.log(req.customer);
     const {cart , order_price} = req.body
     try {
         
-        const customer = await Customer.findById({_id :id })
+        const storeData = await Store.findOne({user_id : user.id})
+
+        const customer = await Customer.findById(id)
         const model = new Order();
         model.user_id = id;
+        model.store_id = storeData.id;
         model.cartItems = cart;
         model.fullName = customer.name;
-        model.order_Price = order_price
-        
+        model.order_Price = order_price;
+        console.log(model);
         
         model.save((err) => {
             if(err){

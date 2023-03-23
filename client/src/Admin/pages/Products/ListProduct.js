@@ -21,10 +21,11 @@ import {
   deleteProductById,
   deleteMultipleProducts,
 } from "../../Api";
-// import {debounce} from "lodash"
-
+import debounce from "lodash/debounce"
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function ViewProduct() {
+  const isSticky = useStickyTitle();
   //  Toast
   const tostRef = useRef(null);
   const [tostData, settostData] = useState({
@@ -53,53 +54,27 @@ export default function ViewProduct() {
   }, []);
 
   // Handle search Start
-
-  const debounce = (func) => {
-    let timer;
-    return function (...args) {
-      const context = this;
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        timer = null;
-        func.apply(context, args);
-      }, 500);
-    };
-  };
-
   const handleSearch = (e) => {
     const Query = e.target.value.toLowerCase();
-    // console.log(Query);
     const newProducts = Products.filter((item) => {
       return (
         item.name.toLowerCase().includes(Query) ||
-        item.status.toLowerCase().includes(Query) ||
+        // item.status.toLowerCase().includes(Query) ||
         item.price === parseInt(Query)
       );
     });
 
     if (Query) {
-      setProducts(newProducts);
+      if(newProducts.length !== 0){
+        setProducts(newProducts);
+      }else{
+        getproducts()
+      }
     } else {
       getproducts();
     }
   };
-  const optimizedFn = useCallback(debounce(handleSearch), []);
-
-  const [SearchFilter, setSearchFilter] = useState([]);
-  const handleFilter = (e) => {
-    const value = e.target.value;
-    setSearchFilter(value);
-  };
-  useEffect(() => {
-    var filterProducts = Products.filter((item) =>
-      SearchFilter.includes(item.status)
-    );
-    if (SearchFilter.length > 0) {
-      setProducts(filterProducts);
-    } else {
-      getproducts();
-    }
-  }, [SearchFilter]);
+  const optimizedFn = useCallback(debounce(handleSearch ,300), []);
 
   // Handle Seacrch End
 
@@ -286,7 +261,7 @@ export default function ViewProduct() {
 
   return (
     <Div>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           navigate={true}
           navlink="/admin/product/create"
@@ -311,20 +286,7 @@ export default function ViewProduct() {
           }}
         >
           <Box className="table-upper-box" gap={3}>
-            {/* <FormControl sx={{ width: "20rem" }}>
-              <InputLabel>Status</InputLabel>
-              <Select
-                label="Status"
-                sx={{ borderRadius: "20px" }}
-                value={SearchFilter}
-                onChange={handleFilter}
-                multiple
-              >
-                <MenuItem value="public">Public</MenuItem>
-                <MenuItem value="pending">Pending</MenuItem>
-                <MenuItem value="draft"> Draft </MenuItem>
-              </Select>
-            </FormControl> */}
+           
             <TextField
               type="search"
               placeholder="Search"

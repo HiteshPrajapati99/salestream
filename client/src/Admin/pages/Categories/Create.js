@@ -18,7 +18,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { CmpTitle, Toast } from "../../components";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import useStickyTitle from "../../hooks/useStickyTitle"
+
+
 export default function CreateCa() {
+  const isSticky = useStickyTitle();
   const dispatch = useDispatch();
   const { data } = useSelector((store) => store.category);
 
@@ -90,7 +94,7 @@ export default function CreateCa() {
   });
   return (
     <Div>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           text="Create New Category"
           handleClick={handlesubmit}

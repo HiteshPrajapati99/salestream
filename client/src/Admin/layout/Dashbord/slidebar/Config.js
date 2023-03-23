@@ -41,6 +41,7 @@ import { GrEdit } from "react-icons/gr";
 export default function Config({ mobileview, setmobileview }) {
   const userStore = useSelector((store) => store.userStore);
   const Management = [
+
     {
       title: "Product",
       icon: <InventoryIcon className="list-icon" />,
@@ -56,6 +57,32 @@ export default function Config({ mobileview, setmobileview }) {
           name: "List",
           icon: <ListAltIcon className="list-icon" />,
           path: "/admin/products",
+          value: false,
+        },
+      ],
+    },
+    {
+      title: "Customers",
+      icon: <FaRegUserCircle className="list-icon" />,
+      value: false,
+      items: [
+        {
+          name: "List",
+          icon: <FiUsers className="list-icon" />,
+          path: "/admin/users",
+          value: false,
+        },
+      ],
+    },
+    {
+      title: "Order",
+      icon: <ShoppingCartCheckoutIcon className="list-icon" />,
+      value: false,
+      items: [
+        {
+          name: "Order",
+          icon: <DeliveryDiningIcon className="list-icon" />,
+          path: "/admin/orders",
           value: false,
         },
       ],
@@ -126,33 +153,6 @@ export default function Config({ mobileview, setmobileview }) {
         },
       ],
     },
-    {
-      title: "Customers",
-      icon: <FaRegUserCircle className="list-icon" />,
-      value: false,
-      items: [
-        {
-          name: "List",
-          icon: <FiUsers className="list-icon" />,
-          path: "/admin/users",
-          value: false,
-        },
-      ],
-    },
-
-    // {
-    //   title: "Order",
-    //   icon: <ShoppingCartCheckoutIcon className="list-icon" />,
-    //   value: false,
-    //   items: [
-    //     {
-    //       name: "Order",
-    //       icon: <DeliveryDiningIcon className="list-icon" />,
-    //       path: "/admin",
-    //       value: false,
-    //     },
-    //   ],
-    // },
   ];
   const [mystate, setMystate] = useState(Management);
 

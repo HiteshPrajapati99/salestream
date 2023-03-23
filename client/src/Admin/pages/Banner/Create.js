@@ -5,8 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { CmpTitle, Toast } from "../../components";
 import ImgDropzone from "../Products/components/ImgDropzone";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function Create() {
+  const isSticky = useStickyTitle();
   const { id } = useParams();
   const navigate = useNavigate();
   //  Toast
@@ -118,7 +120,7 @@ export default function Create() {
   };
   return (
     <Wrapper>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           text={id ? "Update Banner" : "Create New Banner"}
           buttonname={id ? "Update" : "submit"}

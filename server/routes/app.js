@@ -56,6 +56,11 @@ router.get("/customers" , isLogin , isAdmin , GetAllCustomers)
 router.get("/customers/block/:id" , isLogin , isAdmin , BlockCustomer)
 router.get("/customers/unblock/:id" , isLogin , isAdmin , UnblockCustomer)
 
+// Orders Routes
+const {OrderAdmin} = require("../controllers/Order/GetAllOrder")
+
+router.get("/orders" , isLogin , isAdmin ,OrderAdmin)
+
 // dectypt Data
 
 const { decryptdata } = require("../middlewares/crypto");

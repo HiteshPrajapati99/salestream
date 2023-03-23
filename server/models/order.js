@@ -5,6 +5,10 @@ const orderSchema = new mongoose.Schema(
     user_id: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "customer" }],
     },
+    store_id : {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "store" }],
+
+    },
     fullName: {
       type: String,
     },

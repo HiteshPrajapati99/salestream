@@ -8,8 +8,10 @@ import { useDispatch } from "react-redux";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CmpTitle, Toast, DataTable } from "../../components";
 import { getCategory } from "../../redux-store/reducer/Category";
-
+import useStickyTitle from "../../hooks/useStickyTitle";
 export default function ListAllCategory() {
+  
+  const isSticky = useStickyTitle();
 
   //  Toast
   const tostRef = useRef(null);
@@ -139,7 +141,7 @@ export default function ListAllCategory() {
   ];
   return (
     <Div>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           navigate={true}
           navlink="/admin/category/create"

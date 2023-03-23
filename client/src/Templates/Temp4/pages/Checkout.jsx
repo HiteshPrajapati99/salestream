@@ -56,8 +56,9 @@ const Checkout = () => {
       };
   
      const url = "http://localhost:5000/api/order"
-      const token = localStorage.getItem("access-token");
-      const {data} = await axios.post(url , order_data , {headers : {"access-token" : token}})
+      const login = localStorage.getItem("access-token");
+      const store = localStorage.getItem("store")
+      const {data} = await axios.post(url , order_data , {headers : {"access-token" : login , "store-access" : store}})
       console.log(data);
     };
     

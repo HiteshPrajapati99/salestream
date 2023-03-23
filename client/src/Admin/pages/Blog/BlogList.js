@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
+import { Avatar, Box, IconButton,  Typography } from "@mui/material";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { DataGrid } from "@mui/x-data-grid";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CmpTitle, Toast, DataTable } from "../../components";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function BlogList() {
+  const isSticky = useStickyTitle();
   //  Toast
   const tostRef = useRef(null);
   const [tostData, settostData] = useState({
@@ -113,7 +114,7 @@ export default function BlogList() {
   ];
   return (
     <Wrapper>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           navigate={true}
           navlink="/admin/blog/create"

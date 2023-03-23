@@ -30,8 +30,11 @@ import ReactSelect from "react-select";
 
 import { useSelector } from "react-redux";
 import ImgDropzone from "./components/ImgDropzone";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function CreateProduct() {
+  const isSticky = useStickyTitle()
+
   const { brand, category } = useSelector((store) => store);
   // console.log(category);
 
@@ -143,7 +146,7 @@ export default function CreateProduct() {
 
   return (
     <Div>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           handleClick={handleSubmit}
           text="Create New Product"

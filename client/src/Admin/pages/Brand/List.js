@@ -18,8 +18,10 @@ import Create from "./Create";
 import { CmpTitle, Toast, DataTable } from "../../components";
 import { getBrand } from "../../redux-store/reducer/Brand";
 import { Link } from "react-router-dom";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function BrandList() {
+  const isSticky = useStickyTitle();
   //  Toast
   const tostRef = useRef(null);
   const [tostData, settostData] = useState({
@@ -137,7 +139,7 @@ export default function BrandList() {
 
   return (
     <Div>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle text="All Brand" breadcrumbs={{ last: "Brand" }} />
         <Box sx={{ position: "absolute", top: "5px", right: "0" }}>
           <Create />

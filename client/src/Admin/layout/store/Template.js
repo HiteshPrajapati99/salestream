@@ -5,7 +5,6 @@ import { CmpTitle, Toast } from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
-  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -15,6 +14,7 @@ import {
 } from "@mui/material";
 import { getStoreInfo } from "../../redux-store/reducer/UserStore";
 import { useDispatch, useSelector } from "react-redux";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 let storeData = null;
 
@@ -23,6 +23,8 @@ export const getData = (data) => {
 };
 
 export default function Template() {
+  const isSticky = useStickyTitle();
+
   const navigate = useNavigate();
   const dishpatch = useDispatch();
   const { id } = useParams();
@@ -117,26 +119,8 @@ export default function Template() {
 
   return (
     <Wrapper>
-      {/* <Box display="flex" justifyContent="space-between" mb={3}>
-        <Box>
-          {themeName && (
-            <Typography fontWeight="bold">
-              Template Name : {themeName}
-            </Typography>
-          )}
-        </Box>
-        <Box>
-          <Button className="button-1" onClick={handleSubmit}>
-            SUbmit
-          </Button>
-          <Toast
-            message={tostData.message}
-            success={tostData.success}
-            tostRef={tostRef}
-          />
-        </Box>
-      </Box> */}
-      <Box className="top-title">
+      
+      <Box className={isSticky}>
         <CmpTitle
           text={
             themeName ? `Selected Template : ${themeName}` : "Template List"

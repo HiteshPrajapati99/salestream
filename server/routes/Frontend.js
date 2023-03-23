@@ -26,7 +26,7 @@ router.get("/blogs", GetStoreData, GetAllBlog);
 
 
 // Make Order
-router.post("/order" ,  isLogin,CreateOrder )
+router.post("/order" , GetStoreData ,isLogin,CreateOrder )
 
 
 module.exports = router;

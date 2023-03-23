@@ -23,6 +23,7 @@ import {
   Banner,
   StoreManage,
   CustomerList,
+  OrderList
 } from "./Admin";
 
 import Page404 from "./pages/Page404";
@@ -76,6 +77,7 @@ function App() {
             <Route path="/admin/banner/create" element={<CreateBanner />} />
             <Route path="/admin/banner/edit/:id" element={<CreateBanner />} />
             <Route path="/admin/banners" element={<Banner />} />
+            <Route path="/admin/orders" element={<OrderList />} />
 
             {/* =============== Admin Store Rotes  ==============*/}
 

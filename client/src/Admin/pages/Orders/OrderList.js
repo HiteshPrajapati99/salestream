@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Avatar,
   Box,
   Button,
   IconButton,
   Typography,
   Breadcrumbs,
-  Stack
+  Stack,
+  Chip
 } from "@mui/material";
 import styled from "styled-components";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
-import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
-import {CmpTitle, DataTable , Toast} from "../../components";
+import {CmpTitle,  Toast} from "../../components";
 import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function UserList() {
@@ -25,17 +24,17 @@ export default function UserList() {
     message: "",
   });
 
-  const [Customers, setCustomers] = useState([]);
+  const [Orders, setOrders] = useState([]);
   
 
-  const getCustomer = async () => {
-    const url = "http://localhost:5000/store/customers";
+  const getOrders = async () => {
+    const url = "http://localhost:5000/store/orders";
     const token = localStorage.getItem("x-access-token");
     const { data } = await axios.get(url, {
       headers: { "x-access-token": token },
     });
     if(data.success){
-       setCustomers(data.customers);
+       setOrders(data.Orders);
     }else{
       settostData({success : false , message : data.message})
       tostRef.current.show()
@@ -43,20 +42,21 @@ export default function UserList() {
   };
 
   useEffect(() => {
-    getCustomer();
+    getOrders();
   }, []);
 
+  // console.log(Orders);
 
   const columns = [
     {
-      field: "name",
-      headerName: "Name",
-      width: 120,
+      field: "fullName",
+      headerName: "Customer Name",
+      width: 150,
       editable : false ,
     },
     {
-      field: "mo_number",
-      headerName: "Number",
+      field: "order_Price",
+      headerName: "Total Order",
       width: 120,
       editable: false  ,
     },
@@ -69,20 +69,35 @@ export default function UserList() {
       editable : false ,
       sortable: false ,
       disableColumnMenu: true,
-    },
-    {
-      field: "isblocked",
-      headerName: "is Blocked ?.",
-      type: "boolean",
-      width: 100,
-      editable: true,
+    },   {
+      field: "actions",
+      headerName: "Status",
+      width: 130,
+      renderCell: (params) => {
+        return (
+          <Box>
+              <Chip
+                size="small"
+                label={"Pending"}
+                sx={{
+                  color: "rgb(27, 128, 106)",
+                  bgcolor: "rgba(54, 179, 126, 0.16)",
+                  fontWeight: 700,
+                  textTransform: "capitalize",
+                  p: 1.6,
+                }}
+              />
+          </Box>
+        );
+      },
+      // editable: true,
     },
     {
       field: "createdAt",
       headerName: "Create Date",
-      width: 170,
+      width: 230,
       renderCell: (params) =>
-        moment(params.row.createdAt).format("DD-MM-YYYY"),
+        moment(params.row.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
     },
   
   ];
@@ -91,8 +106,8 @@ export default function UserList() {
       
       <Box className={isSticky}>
         <CmpTitle
-          text="Cutomers"
-          breadcrumbs={{ last: "Customers" }}
+          text="Orders"
+          breadcrumbs={{ last: "Orders" }}
           // buttonname="Add New"
         />
         <Toast
@@ -114,7 +129,7 @@ export default function UserList() {
         
           <DataGrid
           getRowId={(row) => row._id}
-          rows={Customers}
+          rows={Orders}
           columns={columns}
           pageSize={10}
           // loading={loading}
@@ -136,7 +151,7 @@ export default function UserList() {
                 justifyContent="center"
                 fontWeight="bold"
               >
-                No Customers available....
+                No Orders available....
               </Stack>
             ),
           }}

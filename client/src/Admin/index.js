@@ -17,3 +17,4 @@ export { default as Blog } from "./pages/Blog/BlogList";
 export { default as CreateBanner } from "./pages/Banner/Create";
 export { default as Banner } from "./pages/Banner/BannerList";
 export { default as StoreManage } from "./layout/store/ManageStore";
+export {default as OrderList} from "./pages/Orders/OrderList"

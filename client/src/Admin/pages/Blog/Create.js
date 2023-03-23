@@ -13,8 +13,10 @@ import JoditEditor from "jodit-react";
 import ImgDropzone from "../Products/components/ImgDropzone";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function Create() {
+  const isSticky = useStickyTitle();
   const { id } = useParams();
   const navigate = useNavigate();
   //  Toast
@@ -124,7 +126,7 @@ export default function Create() {
   };
   return (
     <Wrapper>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           text={id ? "Update Blog" : "Create New Blog"}
           buttonname={id ? "Update" : "submit"}

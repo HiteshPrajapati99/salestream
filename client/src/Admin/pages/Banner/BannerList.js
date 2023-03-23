@@ -1,13 +1,10 @@
 import {
   Avatar,
-  Button,
   Chip,
   IconButton,
-  Stack,
   Typography,
+  Box
 } from "@mui/material";
-import { Box, width } from "@mui/system";
-import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { MdEdit } from "react-icons/md";
@@ -15,8 +12,11 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CmpTitle, Toast, DataTable } from "../../components";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function BannerList() {
+  const isSticky = useStickyTitle();
+
   //  Toast
   const tostRef = useRef(null);
   const [tostData, settostData] = useState({
@@ -147,7 +147,7 @@ export default function BannerList() {
   ];
   return (
     <Wrapper>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           navigate={true}
           navlink="/admin/banner/create"

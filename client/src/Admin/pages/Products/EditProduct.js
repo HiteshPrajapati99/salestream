@@ -22,8 +22,10 @@ import ImgDropzone from "./components/ImgDropzone";
 import { CmpTitle, Toast } from "../../components";
 import ReactSelect from "react-select";
 import { getProductById } from "../../Api/ProductApi";
+import useStickyTitle from "../../hooks/useStickyTitle"
 
 export default function EditProduct() {
+  const isSticky = useStickyTitle();
   //  Toast
   const tostRef = useRef(null);
   const [tostData, settostData] = useState({
@@ -143,7 +145,7 @@ export default function EditProduct() {
 
   return (
     <Div>
-      <Box className="top-title">
+      <Box className={isSticky}>
         <CmpTitle
           handleClick={handleSubmit}
           text="Update Product"

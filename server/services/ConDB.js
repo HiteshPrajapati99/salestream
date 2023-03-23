@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
-const DBURL = process.env.MONGODB_URL;
-// const DBURL = "mongodb://127.0.0.1:27017/MyShopify";
+// const DBURL = process.env.MONGODB_URL;
+const DBURL = "mongodb://127.0.0.1:27017/MyShopify";
 
 // start Connection
 mongoose.set("strictQuery", false);
